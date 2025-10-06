@@ -43,8 +43,8 @@ struct LoginView: View {
                             }
                         } else {
                             defaults.removeObject(forKey: "user")
-                            print("removed")
                         }
+                        defaults.set(rememberMe, forKey: "rememberMe")
                         
                     } else {
                         showLoginAlert = true
@@ -67,10 +67,11 @@ struct LoginView: View {
         .padding()
         .onAppear() {
             if let savedUser = defaults.data(forKey: "user"), let decodedUser = try? JSONDecoder().decode(User.self, from: savedUser) {
-                print("loaded")
                 email = decodedUser.email
                 password = decodedUser.password
             }
+            
+            rememberMe = UserDefaults.standard.bool(forKey: "rememberMe")
         }
     }
 }
