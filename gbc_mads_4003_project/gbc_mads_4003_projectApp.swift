@@ -11,7 +11,7 @@ import SwiftUI
 struct gbc_mads_4003_projectApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }

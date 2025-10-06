@@ -13,13 +13,9 @@ class LoginManager {
         User(id: 2, email: "admin@gmail.com", password: "admin123")
     ]
     
-    class func login(email: String, password: String, rememberMe: Bool) -> User? {
+    class func login(email: String, password: String) -> User? {
         for user in users {
             if (user.email == email && user.password == password) {
-                if (rememberMe) {
-                    
-                }
-                
                 return user
             }
         }
