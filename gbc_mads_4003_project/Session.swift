@@ -9,10 +9,10 @@ import Foundation
 
 class Session {
     var id: Int
-    var name: String
+    var name: String   //name of session
     var description: String
     var starRating: Int
-    var hostName: String
+    var hostName: String //Name of the guide or organization hosting the session
     var photos: [String]
     var pricePerPerson: Int
     var phoneNumber: String
