@@ -130,7 +130,3 @@ struct SessionDetailsScreen: View {
         .frame(minWidth: 100 ,maxWidth:.infinity, minHeight: 200, maxHeight: .infinity)
     }
 }
-
-#Preview {
-    SessionDetailsScreen()
-}
