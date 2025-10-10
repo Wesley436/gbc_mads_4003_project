@@ -42,18 +42,19 @@ struct LoginView: View {
                         let user = LoginManager.login(email: email, password: password)
                         
                         if (user != nil) {
-                            if (rememberMe) {
-                                if let encodedUser = try? JSONEncoder().encode(user) {
+                            if let encodedUser = try? JSONEncoder().encode(user) {
+                                if (rememberMe) {
                                     defaults.set(encodedUser, forKey: "user")
+                                } else {
+                                    defaults.removeObject(forKey: "user")
+                                    email = ""
+                                    password = ""
                                 }
-                            } else {
-                                defaults.removeObject(forKey: "user")
-                                email = ""
-                                password = ""
+                                defaults.set(encodedUser, forKey: "currentUser")
+                                defaults.set(rememberMe, forKey: "rememberMe")
+                                
+                                loggedIn = true
                             }
-                            defaults.set(rememberMe, forKey: "rememberMe")
-                            
-                            loggedIn = true
                         } else {
                             showLoginAlert = true
                         }
@@ -74,6 +75,7 @@ struct LoginView: View {
             }
             .padding()
             .onAppear() {
+                defaults.removeObject(forKey: "currentUser")
                 if let savedUser = defaults.data(forKey: "user"), let decodedUser = try? JSONDecoder().decode(User.self, from: savedUser) {
                     email = decodedUser.email
                     password = decodedUser.password

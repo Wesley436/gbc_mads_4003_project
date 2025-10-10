@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SessionDetailsScreen: View {
-    
-     let session: Session
+    let defaults = UserDefaults.standard
+    let session: Session
     @State private var phoneNumber: String = "+1"
     
     var body: some View {
@@ -68,7 +68,25 @@ struct SessionDetailsScreen: View {
                     HStack {
                         //TO DO: delete the words button when done functionality
                         //favorites button
-                        //Button(action: action) {
+                        Button(action: {
+                            if let savedUser = defaults.data(forKey: "currentUser"), let decodedUser = try? JSONDecoder().decode(User.self, from: savedUser) {
+                                let userId = decodedUser.id
+                                
+                                var userFavourites: [Int:[Int]] = [:]
+                                if let savedUserFavourites = defaults.data(forKey: "userFavourites"), let decodedUserFavourites = try? JSONDecoder().decode([Int:[Int]].self, from: savedUserFavourites) {
+                                    userFavourites = decodedUserFavourites
+                                }
+                                
+                                var favouriteIds = userFavourites[userId] ?? []
+                                if (!favouriteIds.contains(session.id)) {
+                                    favouriteIds.append(session.id)
+                                    userFavourites[userId] = favouriteIds
+                                    if let encodedUserFavourites = try? JSONEncoder().encode(userFavourites) {
+                                        defaults.set(encodedUserFavourites, forKey: "userFavourites")
+                                    }
+                                }
+                            }
+                        }) {
                             VStack {
                                 Image(systemName: "heart")
                                     .foregroundColor(.white)
@@ -83,7 +101,7 @@ struct SessionDetailsScreen: View {
                             .background(.blue.opacity(0.6))
                             .cornerRadius(12)
                             .shadow(radius: 2)
-                        //}end of button
+                        }
                         
                         //Share button
                        // TO DO: make the action go to pages
