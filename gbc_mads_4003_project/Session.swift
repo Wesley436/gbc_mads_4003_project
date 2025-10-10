@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Session: Identifiable {
+class Session: Identifiable , ObservableObject{
     var id: Int
     var name: String   //name of session
     var description: String
@@ -16,8 +16,9 @@ class Session: Identifiable {
     var photos: [String]
     var pricePerPerson: Int
     var phoneNumber: String
+    @Published var isFavorite: Bool
     
-    init (id: Int, name: String, description: String, starRating: Int, hostName: String, photos: [String], pricePerPerson: Int, phoneNumber: String) {
+    init (id: Int, name: String, description: String, starRating: Int, hostName: String, photos: [String], pricePerPerson: Int, phoneNumber: String , isFavorite: Bool = false) {
         self.id = id
         self.name = name
         self.description = description
@@ -26,5 +27,7 @@ class Session: Identifiable {
         self.photos = photos
         self.pricePerPerson = pricePerPerson
         self.phoneNumber = phoneNumber
+        self.isFavorite = isFavorite
+        
     }
 }

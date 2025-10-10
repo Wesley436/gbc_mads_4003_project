@@ -8,7 +8,37 @@
 import SwiftUI
 
 struct SessionsListScreen: View {
+   
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        
+        NavigationView {
+                    List {
+                        ForEach(SessionsManager.sessions) { session in
+                            NavigationLink(destination: SessionDetailsScreen(session: session)) {
+                                HStack(spacing: 15) {
+                                    Image(session.photos.first ?? "placeholder")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 80, height: 80)
+                                        .cornerRadius(10)
+                                        .clipped()
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(session.name)
+                                            .font(.headline)
+                                        
+                                        Text("$\(session.pricePerPerson) per person")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.vertical, 5)
+                            }
+                        }
+                    }
+                    .navigationTitle("Nature Walk Sessions")
+                }
+            }
+        }
+        

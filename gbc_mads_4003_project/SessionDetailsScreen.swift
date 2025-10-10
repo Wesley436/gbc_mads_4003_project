@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SessionDetailsScreen: View {
+    
+     let session: Session
     //TO DO :private variable swap out with session attributes later
     @State private var name : String = "name"
     @State private var id: Int = 0
