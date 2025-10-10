@@ -12,6 +12,8 @@ struct SessionDetailsScreen: View {
     let session: Session
     @State private var phoneNumber: String = "+1"
     
+    @State private var addedToFavourite: Bool = false
+    
     var body: some View {
         NavigationStack{
             ScrollView {
@@ -85,6 +87,7 @@ struct SessionDetailsScreen: View {
                                         defaults.set(encodedUserFavourites, forKey: "userFavourites")
                                     }
                                 }
+                                addedToFavourite = true
                             }
                         }) {
                             VStack {
@@ -92,7 +95,7 @@ struct SessionDetailsScreen: View {
                                     .foregroundColor(.white)
                                     .padding(.bottom, 5)
                                 
-                                Text("favorites button")
+                                Text("Favorites button")
                                     .font(.title3)
                                     .foregroundColor(.white)
                             }//end of VStack
@@ -101,6 +104,9 @@ struct SessionDetailsScreen: View {
                             .background(.blue.opacity(0.6))
                             .cornerRadius(12)
                             .shadow(radius: 2)
+                        }
+                        .alert("Added to favourites", isPresented: $addedToFavourite) {
+                            Button("OK", role: .cancel) { }
                         }
                         
                         //Share button
