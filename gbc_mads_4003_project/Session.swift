@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Session {
+class Session: Identifiable {
     var id: Int
     var name: String   //name of session
     var description: String
