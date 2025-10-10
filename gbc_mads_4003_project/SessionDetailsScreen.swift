@@ -126,15 +126,16 @@ struct SessionDetailsScreen: View {
                         //Share button
                        // TO DO: make the action go to pages
                         //Button(action: action) {
-                            VStack {
-                                Image(systemName: "square.and.arrow.up")
-                                    .foregroundColor(.white)
-                                    .padding(.bottom, 5)
-                                
-                                Text("Share button")
+                            ShareLink(item: "\(session.name), Price: \(session.pricePerPerson)") {
+                                VStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                        .foregroundColor(.white)
+                                        .padding(.bottom, 5)
+                                    Text("Share Session")
                                     .font(.title3)
                                     .foregroundColor(.white)
-                            }//end of VStack
+                                }
+                            }
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: 70)
                             .background(.blue.opacity(0.6))
