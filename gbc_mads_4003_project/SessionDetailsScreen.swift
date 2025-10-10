@@ -67,17 +67,20 @@ struct SessionDetailsScreen: View {
                     
                     
                     //image/ photo display
-                    HStack {
-                        ForEach(0..<session.photos.count, id:\.self){index in
-                            AsyncImage(url: URL(string: session.photos[index])){ result in
-                                result.image?
-                                    .resizable()
-                                    .scaledToFill()
-                                    .cornerRadius(10)
-                                    .clipped()
-                                    .font(.system(size: 40))
+                    ScrollView (.horizontal) {
+                        HStack {
+                            ForEach(0..<session.photos.count, id:\.self){index in
+                                AsyncImage(url: URL(string: session.photos[index])){ result in
+                                    result.image?
+                                        .resizable()
+                                        .scaledToFill()
+                                        .cornerRadius(10)
+                                        .clipped()
+                                        .font(.system(size: 40))
+                                }
                             }
                         }
+                        .frame(maxHeight: 150)
                     }
                     
                     
