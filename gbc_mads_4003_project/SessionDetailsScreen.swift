@@ -82,7 +82,6 @@ struct SessionDetailsScreen: View {
                     
                     
                     HStack {
-                        //TO DO: delete the words button when done functionality
                         //favorites button
                         Button(action: {
                             if let savedUser = defaults.data(forKey: "currentUser"), let decodedUser = try? JSONDecoder().decode(User.self, from: savedUser) {
@@ -123,9 +122,7 @@ struct SessionDetailsScreen: View {
                             Button("OK", role: .cancel) { }
                         }
                         
-                        //Share button
-                       // TO DO: make the action go to pages
-                        //Button(action: action) {
+
                             ShareLink(item: "\(session.name), Price: \(session.pricePerPerson)") {
                                 VStack {
                                     Image(systemName: "square.and.arrow.up")
