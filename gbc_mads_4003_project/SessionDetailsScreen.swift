@@ -53,6 +53,19 @@ struct SessionDetailsScreen: View {
                         .padding(10)
                         .foregroundColor(.blue)
                     
+                    
+                    Button(action: {
+                        if let phoneURL = URL(string: "tel://\(session.phoneNumber)"),
+                           UIApplication.shared.canOpenURL(phoneURL) {
+                            UIApplication.shared.open(phoneURL)
+                        }
+                    }) {
+                        Text(session.phoneNumber)
+                            .foregroundColor(.blue)
+                    }
+                   
+                    
+                    
                     //image/ photo display
                     HStack {
                         ForEach(0..<session.photos.count, id:\.self){index in
@@ -66,6 +79,7 @@ struct SessionDetailsScreen: View {
                             }
                         }
                     }
+                    
                     
                     HStack {
                         //TO DO: delete the words button when done functionality
